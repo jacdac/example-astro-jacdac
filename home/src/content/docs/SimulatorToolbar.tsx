@@ -1,6 +1,6 @@
 import { SRV_BUTTON, SRV_LED, SRV_POTENTIOMETER, SRV_RELAY } from "jacdac-ts"
 import React from "react"
-import SimulatorButton from "./SimulatorButton.tsx"
+import SimulatorButton from "./SimulatorButton"
 
 export default function SimulatorToolbar() {
     return (

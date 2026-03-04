@@ -36,6 +36,7 @@ const Demo = () => {
 }
 
 export default () => (
-<JacdacProvider initialBus={bus}>
-    <Demo />
-</JacdacProvider>)
+    <JacdacProvider initialBus={bus}>
+        <Demo />
+    </JacdacProvider>
+)
