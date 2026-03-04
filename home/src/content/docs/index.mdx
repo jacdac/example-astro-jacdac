@@ -16,25 +16,39 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { SRV_BUTTON} from "jacdac-ts"
+import React from "react"
+import pkg from 'react-jacdac'
 
-## Next steps
+export const { bus, JacdacProvider, useRoles, useServiceProvider, useServices, SimulatorToolbar } = pkg
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+export const Demo = () => {
+    const {
+        roles: { button1, button2, button3 },
+    } = useRoles({
+        button1: { serviceClass: SRV_BUTTON },
+        button2: { serviceClass: SRV_BUTTON },
+        button3: { serviceClass: SRV_BUTTON },
+    })
+    useServiceProvider({ serviceClass: SRV_BUTTON })
+
+    const buttons = useServices({ serviceClass: SRV_BUTTON })
+    return (
+        <>
+            <SimulatorToolbar />
+            <p>buttons:</p>
+            <ul>
+                {buttons?.map(button => (
+                    <li key={button.id}>{button.toString()}</li>
+                ))}
+            </ul>
+            <p>roles:</p>
+            <ul>
+                <li>button1: {button1?.toString() || "unbound"}</li>
+                <li>button2: {button2?.toString() || "unbound"}</li>
+                <li>button3: {button3?.toString() || "unbound"}</li>
+            </ul>
+        </>
+    )
+}
+
